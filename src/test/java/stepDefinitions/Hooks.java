@@ -18,16 +18,17 @@ public class Hooks {
 
     }
 
-    @After
-    public void tearDown(Scenario scenario) {
+@After
+public void tearDown(Scenario scenario) {
 
-        if (scenario.isFailed()) {
-            TakesScreenshot ts = ((TakesScreenshot) Driver.getDriver());
-            byte[] inMemory = ts.getScreenshotAs(OutputType.BYTES);
-            scenario.attach(inMemory, "image/png", "screenshot name");
+    if (scenario.isFailed()) {
+        TakesScreenshot ts = ((TakesScreenshot) Driver.getDriver());
+        byte[] inMemory = ts.getScreenshotAs(OutputType.BYTES);
+        scenario.attach(inMemory, "image/png", "screenshot name");
 
-        }
-         Driver.quitDriver();
-    }
+     }
+
+    Driver.quitDriver();
+ }
 }
 

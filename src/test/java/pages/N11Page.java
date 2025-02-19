@@ -60,4 +60,18 @@ public class N11Page {
     @FindBy(xpath = "//tr[@class=\"prod  \"]")
     public WebElement productList;
 
+    @FindBy(xpath = "//span[@title='Sil']")
+    public WebElement deleteButton;
+
+    @FindBy(xpath = "//a[@title=\"n11\"]")
+    public WebElement n11Button;
+
+    @FindBy(xpath = "//h2[@class=\"title\"]")
+    public WebElement emptyCard;
+
+    @FindBy(xpath = "//a[@class=\"user\"]")
+    public WebElement profileMenu;
+
+    @FindBy(xpath = "//a[@class='logoutBtn']")
+    public WebElement logoutButton;
 }

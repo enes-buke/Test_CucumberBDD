@@ -147,7 +147,6 @@ public class MyStepdefs {
         ReusableMethod.overHover(n11Page.addToCardButton);
         n11Page.addToCardButton.click();
 
-        Driver.getDriver().navigate().refresh();
         ReusableMethod.overHover(n11Page.searchField);
         n11Page.goToCartButton.click();
 
@@ -159,6 +158,42 @@ public class MyStepdefs {
         assertEquals(expectedUrl, Driver.getDriver().getCurrentUrl());
 
         assertTrue(n11Page.productList.isDisplayed());
+
+    }
+
+    @And("User delete product")
+    public void userDeleteProduct() {
+
+       ReusableMethod.overHover(n11Page.n11Button);
+       n11Page.n11Button.click();
+
+       n11Page.goToCartButton.click();
+       ReusableMethod.waitForVisibility(n11Page.deleteButton,10);
+       ReusableMethod.overHover(n11Page.deleteButton);
+       ReusableMethod.clickUsingJavaScript(n11Page.deleteButton);
+
+    }
+
+    @And("Verify that the product is not in the cart")
+    public void verifyThatTheProductIsNotInTheCart() {
+
+        assertTrue(n11Page.emptyCard.isDisplayed());
+
+    }
+
+    @And("Performs user logout operations")
+    public void performsUserLogoutOperations() {
+        ReusableMethod.overHover(n11Page.n11Button);
+        n11Page.n11Button.click();
+
+    ReusableMethod.hoverAndClick(n11Page.profileMenu,n11Page.logoutButton);
+
+    }
+
+    @And("User verifies successfully logout")
+    public void userVerifiesSuccessfullyLogout() {
+
+        assertTrue(n11Page.signInButton.isDisplayed());
 
     }
 }

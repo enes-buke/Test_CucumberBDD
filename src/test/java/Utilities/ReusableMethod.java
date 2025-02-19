@@ -48,7 +48,14 @@ public class ReusableMethod {
         actions.moveToElement(element).perform();
     }
 
-    //==========Return a list of string given a list of Web Element====////
+    public static void hoverAndClick(WebElement menuElement, WebElement subElement) {
+        Actions actions = new Actions(Driver.getDriver());
+        actions.moveToElement(menuElement).perform();
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(subElement));
+        subElement.click();
+    }
+
     public static List<String> stringList(List<WebElement> list) {
         List<String> elemTexts = new ArrayList<>();
         for (WebElement el : list) {
@@ -70,9 +77,9 @@ public class ReusableMethod {
         return elemTexts;
     }
 
-    public static void wait(int saniye) {
+    public static void wait(int second) {
         try {
-            Thread.sleep(saniye * 1000);
+            Thread.sleep(second * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -83,19 +90,20 @@ public class ReusableMethod {
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static WebElement waitForVisibility(By locator, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
-
-    public static WebElement waitForClickablility(WebElement element, int timeout) {
+    public static WebElement waitForClickability(WebElement element, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public static WebElement waitForClickablility(By locator, int timeout) {
+
+    public static WebElement waitForClickabilityByLocator(By locator, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public static void clickUsingJavaScript(WebElement element) {
+        JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+        executor.executeScript("arguments[0].click();", element);
     }
 
 
